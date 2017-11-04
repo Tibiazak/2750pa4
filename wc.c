@@ -64,6 +64,7 @@ int main(int argc, char** argv)
    {
       // process from stdio
       printf("Use standard input.\n");
+      fileCounts(stdin);
    }
    return 0;
 }
