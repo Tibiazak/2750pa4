@@ -5,6 +5,7 @@
  */
 #include <stdio.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 //A function that counts words, sentences and characters in a file
 void fileCounts(FILE * fp)
@@ -22,7 +23,7 @@ void fileCounts(FILE * fp)
          newWord = true;
          if(c == '\n')
          {
-            sentCount = true;
+            newSent = true;
          }
       }
       else
@@ -56,6 +57,7 @@ int main(int argc, char** argv)
       for(i=1; i < argc; i++)
       {
          fp = fopen(argv[i], "r");
+	 printf("For file %s:\n", argv[i]);
          fileCounts(fp);
          fclose(fp);
       }
