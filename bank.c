@@ -19,12 +19,21 @@ typedef struct account_t{
 int menu()
 {
    int status = 0;
-   printf("\n ************************\n");
+   printf("\n************************\n");
    printf("Welcome to the bank!\n************************\nPlease make a selection:\n");
    printf("0: Exit\n1: Deposit\n2: Withdrawal\n3: Add Account\n");
    printf("4: Remove Account\n5: Balance Inquiry\n6: View Accounts\n");
    scanf("%i", &status);
    return status;
+}
+
+void fileWrite(FILE * fp, account_t list[49], int maxNum)
+{
+   int i;
+   for(i = 0; i < maxNum; i++)
+   {
+      fwrite(&list[i], sizeof(account_t), 1, fp);
+   }
 }
 
 // A menu-driven banking program storing data in a binary file
@@ -76,6 +85,7 @@ int main(int argc, char** argv)
                   scanf("%i", &temp_amt);
                   accList[i].accountBal = temp_amt;
                   printf("Deposit successful!\n");
+                  fileWrite(fp, accList, numOfAccts);
                   done = true;
                }
             }
@@ -128,6 +138,7 @@ int main(int argc, char** argv)
             accList[numOfAccts] = account;
             numOfAccts++;
             printf("Account added successfully!\n");
+            fileWrite(fp, accList, numOfAccts);
             status = menu();
             break;
          case 4: //remove account
@@ -159,6 +170,15 @@ int main(int argc, char** argv)
             status = menu();
             break;
          case 6: //view all accounts
+            for(i = 0; i < numOfAccts; i++)
+            {
+               printf("Name: %s %s %s\n Account Number: %i\nBalance: $%i", 
+                     accList[i].fName, 
+                     accList[i].initial, 
+                     accList[i].lName, 
+                     accList[i].accountNum, 
+                     accList[i].accountBal);
+            }
             status = menu();
             break;
          default:
