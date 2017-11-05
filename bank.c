@@ -233,7 +233,7 @@ int main(int argc, char** argv)
             }
             for(i = 0; i < numOfAccts; i++)
             {
-               printf("Name: %s %s %s\nAccount Number: %i\nBalance: $%i\n", 
+               printf("Name: %s %s %s\nAccount Number: %i\nBalance: $%i\n\n", 
                      accList[i].fName, 
                      accList[i].initial, 
                      accList[i].lName, 
