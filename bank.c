@@ -19,7 +19,7 @@ typedef struct account_t{
 int menu()
 {
    int status = 0;
-   printf("\n ************************\n")
+   printf("\n ************************\n");
    printf("Welcome to the bank!\n************************\nPlease make a selection:\n");
    printf("0: Exit\n1: Deposit\n2: Withdrawal\n3: Add Account\n");
    printf("4: Remove Account\n5: Balance Inquiry\n6: View Accounts\n");
