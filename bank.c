@@ -49,7 +49,7 @@ int main(int argc, char** argv)
    int temp_accNum;
    int temp_amt;
    int readCheck;
-   int i,j = 0;
+   int i = 0;
    int numOfAccts = 0;
    bool done = false;
    fp = fopen("accounts.dat", "ab+");
@@ -104,17 +104,17 @@ int main(int argc, char** argv)
             break;
          case 2: //withdraw
             printf("Please enter the account number:\n");
-            scanf("%i", temp_accNum);
+            scanf("%i", &temp_accNum);
             for(i = 0; i < numOfAccts; i++)
             {
                if(accList[i].accountNum == temp_accNum)
                {
                   printf("Please enter the amount to withdraw\n");
-                  scanf("%i", temp_amt);
+                  scanf("%i", &temp_amt);
                   if(accList[i].accountBal > temp_amt)
                   {
                      accList[i].accountBal = temp_amt;
-                     printf("The new balance is $%i\n", accList[i].Bal);
+                     printf("The new balance is $%i\n", accList[i].accountBal);
                   }
                   else
                   {
@@ -175,7 +175,7 @@ int main(int argc, char** argv)
             break;
          case 4: //remove account
             printf("Please enter the account number to remove: \n");
-            scanf("%i", temp_accNum);
+            scanf("%i", &temp_accNum);
 
             for(i = 0; i < numOfAccts; i++)
             {
