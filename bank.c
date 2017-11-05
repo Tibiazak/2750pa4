@@ -16,11 +16,11 @@ typedef struct account_t{
 
 int menu()
 {
-   int status;
+   int status = 0;
    printf("Welcome to the bank!\nPlease make a selection:\n");
    printf("0: Exit\n1: Deposit\n2: Withdrawal\n3: Add Account\n");
-   prinf("4: Remove Account\n5: Balance Inquiry\n6: View Accounts\n");
-   scanf("%i", status);
+   printf("4: Remove Account\n5: Balance Inquiry\n6: View Accounts\n");
+   scanf("%i", &status);
    return status;
 }
 
@@ -63,13 +63,13 @@ int main(int argc, char** argv)
       {
          case 1: //deposit
             printf("Please enter the account number:\n");
-            scanf("%i", temp_accNum);
+            scanf("%i", &temp_accNum);
             for( i = 0; i <= numOfAccts; i++)
             {
                if (accList[i].accountNum == temp_accNum)
                {
                   printf("Please enter the amount to deposit\n");
-                  scanf("%i", temp_amt);
+                  scanf("%i", &temp_amt);
                   accList[i].accountBal = temp_amt;
                   printf("Deposit successful!\n");
                   status = menu();
