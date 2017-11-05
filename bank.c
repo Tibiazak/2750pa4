@@ -88,6 +88,7 @@ int main(int argc, char** argv)
                   scanf("%i", &temp_amt);
                   accList[i].accountBal = temp_amt;
                   printf("Deposit successful!\n");
+                  printf("New balance is: $%i\n", accList[i].accountBal);
                   fileWrite(fp, accList, numOfAccts);
                   done = true;
                }
