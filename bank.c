@@ -92,7 +92,7 @@ int main(int argc, char** argv)
                   accList[i].accountBal = temp_amt;
                   printf("Deposit successful!\n");
                   printf("New balance is: $%i\n", accList[i].accountBal);
-                  fileWrite(fp, accList, numOfAccts);
+                  fileWrite(accList, numOfAccts);
                   done = true;
                }
             }
@@ -129,7 +129,7 @@ int main(int argc, char** argv)
             if(done)
             {
                done = false;
-               fileWrite(fp, accList, numOfAccts);
+               fileWrite(accList, numOfAccts);
                status = menu();
                break;
             }
@@ -173,7 +173,7 @@ int main(int argc, char** argv)
             accList[numOfAccts] = account;
             numOfAccts++;
             printf("Account added successfully!\n");
-            fileWrite(fp, accList, numOfAccts);
+            fileWrite(accList, numOfAccts);
             status = menu();
             break;
          case 4: //remove account
@@ -193,7 +193,7 @@ int main(int argc, char** argv)
             }
             if(done)
             {
-               fileWrite(fp, accList, numOfAccts);
+               fileWrite(accList, numOfAccts);
                done = false;
                status = menu();
                break;
