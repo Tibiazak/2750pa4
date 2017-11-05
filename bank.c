@@ -17,9 +17,9 @@ typedef struct account_t{
 int menu()
 {
    int status;
-   printf("Welcome to the bank!\nPlease make a selection:\n")
+   printf("Welcome to the bank!\nPlease make a selection:\n");
    printf("0: Exit\n1: Deposit\n2: Withdrawal\n3: Add Account\n");
-   prtinf("4: Remove Account\n5: Balance Inquiry\n6: View Accounts\n");
+   prinf("4: Remove Account\n5: Balance Inquiry\n6: View Accounts\n");
    scanf("%i", status);
    return status;
 }
@@ -44,12 +44,12 @@ int main(int argc, char** argv)
    }
 
    //make an array of everything in the file so far
-   readCheck = fread(&account, size_of(account_t), 1, fp);
+   readCheck = fread(&account, sizeof(account_t), 1, fp);
    while( (readCheck != 0) && (i < 50) )
    {
       accList[i] = account;
       i++;
-      readCheck = fread(&account, size_of(account_t), 1, fp);
+      readCheck = fread(&account, sizeof(account_t), 1, fp);
    }
    numOfAccts = i; //get the current max number of accounts
 
