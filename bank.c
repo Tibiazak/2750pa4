@@ -5,6 +5,8 @@
  */
 
 #include <stdio.h>
+#include <stdbool.h>
+
 // A struct of account type, holding name, account number and balance
 typedef struct account_t{
    char fName[20];
@@ -37,6 +39,7 @@ int main(int argc, char** argv)
    int readCheck;
    int i = 0;
    int numOfAccts = 0;
+   bool done = false;
    fp = fopen("accounts.dat", "ab+");
    if(fp == NULL)
    {
@@ -73,9 +76,14 @@ int main(int argc, char** argv)
                   scanf("%i", &temp_amt);
                   accList[i].accountBal = temp_amt;
                   printf("Deposit successful!\n");
-                  status = menu();
-                  break;
+                  done = true;
                }
+            }
+            if(done)
+            {
+               done = false;
+               status = menu();
+               break;
             }
             printf("Account number is invalid!\n");
             status = menu();
@@ -103,12 +111,16 @@ int main(int argc, char** argv)
                   if(accList[i].accountNum == temp_accNum)
                   {
                      printf("The account number is in use!");
-                     status = menu();
-                     break;
+                     done = true;
                   }
                }
             }
-
+            if(done)
+            {
+               done = false;
+               status = menu();
+               break;
+            }
             printf("Please enter the initial deposit amount:\n");
             scanf("%i", &account.accountBal);
             account.accountNum = temp_accNum;
@@ -134,9 +146,14 @@ int main(int argc, char** argv)
                      accList[i].lName, 
                      accList[i].accountNum, 
                      accList[i].accountBal);
-                  status = menu();
-                  break;
+                  done = true;
                }
+            }
+            if(done)
+            {
+               done = false;
+               status = menu();
+               break;
             }
             printf("The account number is invalid!\n");
             status = menu();
