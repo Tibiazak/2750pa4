@@ -84,13 +84,13 @@ int main(int argc, char** argv)
             break;
          case 3: //add account
             printf("Please enter the first name:\n");
-            scanf("%s", &account.fName);
+            scanf("%s", &account.fName[0]);
 
             printf("Please enter the middle initial:\n");
-            scanf("%s", &account.initial);
+            scanf("%s", &account.initial[0]);
 
             printf("Please enter the last name:\n");
-            scanf("%s", &account.lName);
+            scanf("%s", &account.lName[0]);
 
             printf("Please enter the desired account number:\n");
             scanf("%i", &temp_accNum);
