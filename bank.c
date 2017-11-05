@@ -29,15 +29,16 @@ int menu()
 }
 
 //Write the array to the file
-void fileWrite(FILE * fp, account_t list[49], int maxNum)
+void fileWrite(account_t list[49], int maxNum)
 {
-   fseek(fp, 0, SEEK_SET);
+   FILE * fp = fopen("accounts.dat", "wb");
    int i;
    for(i = 0; i < maxNum; i++)
    {
       fwrite(&list[i], sizeof(account_t), 1, fp);
    }
    fflush(fp);
+   fclose(fp);
 }
 
 // A menu-driven banking program storing data in a binary file
@@ -53,7 +54,7 @@ int main(int argc, char** argv)
    int i = 0;
    int numOfAccts = 0;
    bool done = false;
-   fp = fopen("accounts.dat", "ab+");
+   fp = fopen("accounts.dat", "rb");
    if(fp == NULL)
    {
       printf("Failed to open the file!\n");
@@ -69,6 +70,7 @@ int main(int argc, char** argv)
       readCheck = fread(&account, sizeof(account_t), 1, fp);
    }
    numOfAccts = i; //get the current max number of accounts
+   fclose(fp);
 
    //start the main loop
    //print menu, get user selection
@@ -245,6 +247,5 @@ int main(int argc, char** argv)
             status = menu();
       }
    }
-   fclose(fp);
    return 0;
 }
