@@ -37,6 +37,7 @@ void fileWrite(FILE * fp, account_t list[49], int maxNum)
    {
       fwrite(&list[i], sizeof(account_t), 1, fp);
    }
+   fflush(fp);
 }
 
 // A menu-driven banking program storing data in a binary file
@@ -224,6 +225,10 @@ int main(int argc, char** argv)
             status = menu();
             break;
          case 6: //view all accounts
+            if (numOfAccts == 0)
+            {
+               printf("There are no accounts!\n");
+            }
             for(i = 0; i < numOfAccts; i++)
             {
                printf("Name: %s %s %s\nAccount Number: %i\nBalance: $%i", 
