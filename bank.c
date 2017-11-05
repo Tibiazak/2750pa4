@@ -17,7 +17,8 @@ typedef struct account_t{
 int menu()
 {
    int status = 0;
-   printf("Welcome to the bank!\nPlease make a selection:\n");
+   printf("\n ************************\n")
+   printf("Welcome to the bank!\n************************\nPlease make a selection:\n");
    printf("0: Exit\n1: Deposit\n2: Withdrawal\n3: Add Account\n");
    printf("4: Remove Account\n5: Balance Inquiry\n6: View Accounts\n");
    scanf("%i", &status);
@@ -114,7 +115,7 @@ int main(int argc, char** argv)
 
             accList[numOfAccts] = account;
             numOfAccts++;
-            printf("Account added successfully!");
+            printf("Account added successfully!\n");
             status = menu();
             break;
          case 4: //remove account
