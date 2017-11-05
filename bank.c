@@ -24,7 +24,7 @@ int menu()
    printf("Welcome to the bank!\n************************\nPlease make a selection:\n");
    printf("0: Exit\n1: Deposit\n2: Withdrawal\n3: Add Account\n");
    printf("4: Remove Account\n5: Balance Inquiry\n6: View Accounts\n");
-   scanf("%i", &status);
+   scanf("%d", &status);
    return status;
 }
 
@@ -82,16 +82,16 @@ int main(int argc, char** argv)
       {
          case 1: //deposit
             printf("Please enter the account number:\n");
-            scanf("%i", &temp_accNum);
+            scanf("%d", &temp_accNum);
             for( i = 0; i < numOfAccts; i++)
             {
                if (accList[i].accountNum == temp_accNum)
                {
                   printf("Please enter the amount to deposit\n");
-                  scanf("%i", &temp_amt);
+                  scanf("%d", &temp_amt);
                   accList[i].accountBal = temp_amt;
                   printf("Deposit successful!\n");
-                  printf("New balance is: $%i\n", accList[i].accountBal);
+                  printf("New balance is: $%d\n", accList[i].accountBal);
                   fileWrite(accList, numOfAccts);
                   done = true;
                }
@@ -107,17 +107,17 @@ int main(int argc, char** argv)
             break;
          case 2: //withdraw
             printf("Please enter the account number:\n");
-            scanf("%i", &temp_accNum);
+            scanf("%d", &temp_accNum);
             for(i = 0; i < numOfAccts; i++)
             {
                if(accList[i].accountNum == temp_accNum)
                {
                   printf("Please enter the amount to withdraw\n");
-                  scanf("%i", &temp_amt);
+                  scanf("%d", &temp_amt);
                   if(accList[i].accountBal > temp_amt)
                   {
                      accList[i].accountBal = temp_amt;
-                     printf("The new balance is $%i\n", accList[i].accountBal);
+                     printf("The new balance is $%d\n", accList[i].accountBal);
                   }
                   else
                   {
@@ -147,7 +147,7 @@ int main(int argc, char** argv)
             scanf("%s", &account.lName[0]);
 
             printf("Please enter the desired account number:\n");
-            scanf("%i", &temp_accNum);
+            scanf("%d", &temp_accNum);
 
             if(numOfAccts != 0)
             {
@@ -159,6 +159,11 @@ int main(int argc, char** argv)
                      done = true;
                   }
                }
+	       if((temp_accNum < 100000) || (temp_accNum > 999999))
+	       {
+                  printf("The account number must be 6 digits long with no leading zeroes!\n");
+		  done = true;
+	       }
             }
             if(done)
             {
@@ -167,7 +172,7 @@ int main(int argc, char** argv)
                break;
             }
             printf("Please enter the initial deposit amount:\n");
-            scanf("%i", &account.accountBal);
+            scanf("%d", &account.accountBal);
             account.accountNum = temp_accNum;
 
             accList[numOfAccts] = account;
@@ -178,7 +183,7 @@ int main(int argc, char** argv)
             break;
          case 4: //remove account
             printf("Please enter the account number to remove: \n");
-            scanf("%i", &temp_accNum);
+            scanf("%d", &temp_accNum);
 
             for(i = 0; i < numOfAccts; i++)
             {  // if account number exists, overwrite account to be deleted
@@ -203,12 +208,12 @@ int main(int argc, char** argv)
             break;
          case 5: //balance inquiry
             printf("Please enter the account number:\n");
-            scanf("%i", &temp_accNum);
+            scanf("%d", &temp_accNum);
             for(i = 0; i < numOfAccts; i++)
             {
                if(accList[i].accountNum == temp_accNum)
                {
-                  printf("The account in the name of %s %s %s with number %i has a balance of $%i\n", 
+                  printf("The account in the name of %s %s %s with number %d has a balance of $%d\n", 
                      accList[i].fName, 
                      accList[i].initial, 
                      accList[i].lName, 
@@ -233,7 +238,7 @@ int main(int argc, char** argv)
             }
             for(i = 0; i < numOfAccts; i++)
             {
-               printf("Name: %s %s %s\nAccount Number: %i\nBalance: $%i\n\n", 
+               printf("Name: %s %s %s\nAccount Number: %d\nBalance: $%d\n\n", 
                      accList[i].fName, 
                      accList[i].initial, 
                      accList[i].lName, 
