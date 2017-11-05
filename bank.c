@@ -64,7 +64,7 @@ int main(int argc, char** argv)
          case 1: //deposit
             printf("Please enter the account number:\n");
             scanf("%i", &temp_accNum);
-            for( i = 0; i <= numOfAccts; i++)
+            for( i = 0; i < numOfAccts; i++)
             {
                if (accList[i].accountNum == temp_accNum)
                {
@@ -83,12 +83,61 @@ int main(int argc, char** argv)
             status = menu();
             break;
          case 3: //add account
+            printf("Please enter the first name:\n");
+            scanf("%s", &account.fName);
+
+            printf("Please enter the middle initial:\n");
+            scanf("%s", &account.initial);
+
+            printf("Please enter the last name:\n");
+            scanf("%s", &account.lName);
+
+            printf("Please enter the desired account number:\n");
+            scanf("%i", &temp_accNum);
+
+            if(numOfAccts != 0)
+            {
+               for(i = 0; i < numOfAccts; i++)
+               {
+                  if(accList[i].accountNum == temp_accNum)
+                  {
+                     printf("The account number is in use!");
+                     status = menu();
+                     break;
+                  }
+               }
+            }
+
+            printf("Please enter the initial deposit amount:\n");
+            scanf("%i", &account.accountBal);
+            account.accountNum = temp_accNum;
+
+            accList[numOfAccts] = account;
+            numOfAccts++;
+            printf("Account added successfully!");
             status = menu();
             break;
          case 4: //remove account
             status = menu();
             break;
          case 5: //balance inquiry
+            printf("Please enter the account number:\n");
+            scanf("%i", &temp_accNum);
+            for(i = 0; i < numOfAccts; i++)
+            {
+               if(accList[i].accountNum == temp_accNum)
+               {
+                  printf("The account in the name of %s %s %s with number %i has a balance of $%i\n", 
+                     accList[i].fName, 
+                     accList[i].initial, 
+                     accList[i].lName, 
+                     accList[i].accountNum, 
+                     accList[i].accountBal);
+                  status = menu();
+                  break;
+               }
+            }
+            printf("The account number is invalid!\n");
             status = menu();
             break;
          case 6: //view all accounts
