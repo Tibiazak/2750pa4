@@ -31,7 +31,7 @@ int menu()
 //Write the array to the file
 void fileWrite(FILE * fp, account_t list[49], int maxNum)
 {
-   fseek(fp, 0, SET_SEEK);
+   fseek(fp, 0, SEEK_SET);
    int i;
    for(i = 0; i < maxNum; i++)
    {
@@ -178,7 +178,8 @@ int main(int argc, char** argv)
             scanf("%i", &temp_accNum);
 
             for(i = 0; i < numOfAccts; i++)
-            {
+            {  // if account number exists, overwrite account to be deleted
+               // with last account in array
                if(accList[i].accountNum == temp_accNum)
                {
                   accList[i] = accList[numOfAccts-1];
