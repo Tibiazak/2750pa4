@@ -16,6 +16,7 @@ typedef struct account_t{
    int accountBal;
 } account_t;
 
+//Print out the menu and get the user's choice
 int menu()
 {
    int status = 0;
@@ -27,8 +28,10 @@ int menu()
    return status;
 }
 
+//Write the array to the file
 void fileWrite(FILE * fp, account_t list[49], int maxNum)
 {
+   fseek(fp, 0, SET_SEEK);
    int i;
    for(i = 0; i < maxNum; i++)
    {
@@ -46,7 +49,7 @@ int main(int argc, char** argv)
    int temp_accNum;
    int temp_amt;
    int readCheck;
-   int i = 0;
+   int i,j = 0;
    int numOfAccts = 0;
    bool done = false;
    fp = fopen("accounts.dat", "ab+");
@@ -99,6 +102,34 @@ int main(int argc, char** argv)
             status = menu();
             break;
          case 2: //withdraw
+            printf("Please enter the account number:\n");
+            scanf("%i", temp_accNum);
+            for(i = 0; i < numOfAccts; i++)
+            {
+               if(accList[i].accountNum == temp_accNum)
+               {
+                  printf("Please enter the amount to withdraw\n");
+                  scanf("%i", temp_amt);
+                  if(accList[i].accountBal > temp_amt)
+                  {
+                     accList[i].accountBal = temp_amt;
+                     printf("The new balance is $%i\n", accList[i].Bal);
+                  }
+                  else
+                  {
+                     printf("Insufficient funds!\n");
+                  }
+                  done = true;
+               }
+            }
+            if(done)
+            {
+               done = false;
+               fileWrite(fp, accList, numOfAccts);
+               status = menu();
+               break;
+            }
+            printf("The account number is invalid!\n");
             status = menu();
             break;
          case 3: //add account
@@ -142,6 +173,27 @@ int main(int argc, char** argv)
             status = menu();
             break;
          case 4: //remove account
+            printf("Please enter the account number to remove: \n");
+            scanf("%i", temp_accNum);
+
+            for(i = 0; i < numOfAccts; i++)
+            {
+               if(accList[i].accountNum == temp_accNum)
+               {
+                  accList[i] = accList[numOfAccts-1];
+                  numOfAccts--;
+                  i = numOfAccts;
+                  done = true;
+               }
+            }
+            if(done)
+            {
+               fileWrite(fp, accList, numOfAccts);
+               done = false;
+               status = menu();
+               break;
+            }
+            printf("Account number invalid\n");
             status = menu();
             break;
          case 5: //balance inquiry
@@ -172,7 +224,7 @@ int main(int argc, char** argv)
          case 6: //view all accounts
             for(i = 0; i < numOfAccts; i++)
             {
-               printf("Name: %s %s %s\n Account Number: %i\nBalance: $%i", 
+               printf("Name: %s %s %s\nAccount Number: %i\nBalance: $%i", 
                      accList[i].fName, 
                      accList[i].initial, 
                      accList[i].lName, 
