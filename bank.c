@@ -89,7 +89,7 @@ int main(int argc, char** argv)
                {
                   printf("Please enter the amount to deposit\n");
                   scanf("%d", &temp_amt);
-                  accList[i].accountBal = temp_amt;
+                  accList[i].accountBal += temp_amt;
                   printf("Deposit successful!\n");
                   printf("New balance is: $%d\n", accList[i].accountBal);
                   fileWrite(accList, numOfAccts);
@@ -116,7 +116,7 @@ int main(int argc, char** argv)
                   scanf("%d", &temp_amt);
                   if(accList[i].accountBal > temp_amt)
                   {
-                     accList[i].accountBal = temp_amt;
+                     accList[i].accountBal = accList[i].accountBal - temp_amt;
                      printf("The new balance is $%d\n", accList[i].accountBal);
                   }
                   else
